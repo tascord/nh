@@ -1,7 +1,6 @@
 use std::{
   collections::HashSet,
-  fmt,
-  io,
+  fmt, io,
   os::unix::process::CommandExt,
   path::Path,
   process::{Command as StdCommand, Stdio},
@@ -557,7 +556,7 @@ mod tests {
 }
       "
       .to_string(),
-      attribute:  vec![],
+      attribute: vec![],
     };
 
     let result = get_build_image_variants(&installable, "test");
@@ -592,7 +591,7 @@ mod tests {
       .expect("Failed to write test file");
 
     let installable = Installable::File {
-      path:      test_file.path().to_path_buf(),
+      path: test_file.path().to_path_buf(),
       attribute: vec![],
     };
 

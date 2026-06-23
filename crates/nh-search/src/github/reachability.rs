@@ -5,9 +5,7 @@ use serde_json::{Map, Value, json};
 
 use super::transport::GraphqlClient;
 pub use super::types::{
-  BranchReachability,
-  BranchReachabilityRequest,
-  BranchReachabilityStatus,
+  BranchReachability, BranchReachabilityRequest, BranchReachabilityStatus,
 };
 
 const COMPARE_CHUNK_SIZE: usize = 10;
@@ -53,11 +51,9 @@ fn probe_chunk(
       let reason = error_chain(&err);
       requests
         .iter()
-        .map(|request| {
-          BranchReachability {
-            branch: request.branch.clone(),
-            status: BranchReachabilityStatus::Unknown(reason.clone()),
-          }
+        .map(|request| BranchReachability {
+          branch: request.branch.clone(),
+          status: BranchReachabilityStatus::Unknown(reason.clone()),
         })
         .collect()
     },
@@ -144,11 +140,9 @@ fn compare_status_to_reachability(status: &str) -> BranchReachabilityStatus {
   match status {
     "BEHIND" | "IDENTICAL" => BranchReachabilityStatus::Contains,
     "AHEAD" | "DIVERGED" => BranchReachabilityStatus::Missing,
-    other => {
-      BranchReachabilityStatus::Unknown(format!(
-        "unknown comparison status {other}"
-      ))
-    },
+    other => BranchReachabilityStatus::Unknown(format!(
+      "unknown comparison status {other}"
+    )),
   }
 }
 
@@ -165,11 +159,8 @@ mod tests {
   use serde_json::json;
 
   use super::{
-    BranchReachabilityRequest,
-    BranchReachabilityStatus,
-    compare_query,
-    compare_status_to_reachability,
-    error_chain,
+    BranchReachabilityRequest, BranchReachabilityStatus, compare_query,
+    compare_status_to_reachability, error_chain,
   };
 
   #[test]
@@ -195,7 +186,7 @@ mod tests {
   #[test]
   fn compare_query_aliases_branch_checks() {
     let requests = vec![BranchReachabilityRequest {
-      branch:     "master".to_string(),
+      branch: "master".to_string(),
       commit_sha: "abc123".to_string(),
     }];
 

@@ -1,6 +1,5 @@
 use std::{
-  env,
-  fs,
+  env, fs,
   io::{self, Write},
   os::unix::fs::{DirBuilderExt, OpenOptionsExt, PermissionsExt},
   path::{Path, PathBuf},
@@ -17,7 +16,7 @@ const CONFIG_FILE: &str = "config.toml";
 
 #[derive(Debug)]
 pub struct ConfigStore {
-  path:     PathBuf,
+  path: PathBuf,
   document: DocumentMut,
 }
 
@@ -167,7 +166,7 @@ mod tests {
   use super::{ConfigStore, default_config_path};
 
   struct EnvGuard {
-    key:   &'static str,
+    key: &'static str,
     value: Option<std::ffi::OsString>,
   }
 

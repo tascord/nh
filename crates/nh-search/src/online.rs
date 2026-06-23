@@ -6,13 +6,9 @@ use tracing::debug;
 use crate::{
   args,
   backend::{self, SearchContexts},
-  channel,
-  query,
-  render,
+  channel, query, render,
   types::{
-    OptionJsonOutput,
-    OptionSearchResult,
-    PackageJsonOutput,
+    OptionJsonOutput, OptionSearchResult, PackageJsonOutput,
     PackageSearchResult,
   },
 };
@@ -109,9 +105,9 @@ impl OnlineMode for Packages {
 
   fn contexts(&self) -> SearchContexts {
     SearchContexts {
-      build:   "building search query",
+      build: "building search query",
       execute: "querying the elasticsearch API",
-      parse:   "parsing search document",
+      parse: "parsing search document",
     }
   }
 
@@ -160,9 +156,9 @@ impl OnlineMode for Options {
 
   fn contexts(&self) -> SearchContexts {
     SearchContexts {
-      build:   "building option search query",
+      build: "building option search query",
       execute: "querying the elasticsearch API for options",
-      parse:   "parsing option search document",
+      parse: "parsing option search document",
     }
   }
 

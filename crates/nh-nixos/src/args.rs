@@ -4,10 +4,7 @@ use clap::{Args, Subcommand};
 use nh_core::{
   args::{DiffType, NixBuildPassthroughArgs},
   checks::{
-    FeatureRequirements,
-    FlakeFeatures,
-    LegacyFeatures,
-    OsReplFeatures,
+    FeatureRequirements, FlakeFeatures, LegacyFeatures, OsReplFeatures,
   },
 };
 use nh_installable::{CommandContext, InstallableArgs};

@@ -9,9 +9,7 @@ use tracing::debug;
 use yansi::{Color, Paint};
 
 use crate::types::{
-  OfflineJsonOutput,
-  OfflineOptionResult,
-  OfflinePackageResult,
+  OfflineJsonOutput, OfflineOptionResult, OfflinePackageResult,
 };
 
 #[allow(clippy::cast_possible_truncation)]
@@ -77,23 +75,19 @@ pub fn run(
   if json {
     let offline_opts: Vec<OfflineOptionResult> = option_results
       .into_iter()
-      .map(|(db_path, rec)| {
-        OfflineOptionResult {
-          db_path,
-          name: rec.name,
-          summary: rec.summary,
-        }
+      .map(|(db_path, rec)| OfflineOptionResult {
+        db_path,
+        name: rec.name,
+        summary: rec.summary,
       })
       .collect();
 
     let offline_pkgs: Vec<OfflinePackageResult> = package_results
       .into_iter()
-      .map(|(db_path, rec)| {
-        OfflinePackageResult {
-          db_path,
-          path: rec.path,
-          packages: rec.packages,
-        }
+      .map(|(db_path, rec)| OfflinePackageResult {
+        db_path,
+        path: rec.path,
+        packages: rec.packages,
       })
       .collect();
 

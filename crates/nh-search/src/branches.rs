@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct BranchPlan {
-  probe_targets:   Vec<String>,
+  probe_targets: Vec<String>,
   summary_targets: Vec<String>,
 }
 
@@ -140,10 +140,10 @@ mod tests {
     expect_next("staging-next", &["master"]);
     expect_next("master", &["nixpkgs-unstable", "nixos-unstable-small"]);
     expect_next("nixos-unstable-small", &["nixos-unstable"]);
-    expect_next("release-25.11", &[
-      "nixpkgs-25.11-darwin",
-      "nixos-25.11-small",
-    ]);
+    expect_next(
+      "release-25.11",
+      &["nixpkgs-25.11-darwin", "nixos-25.11-small"],
+    );
     expect_next("staging-20.09", &["release-20.09"]);
     expect_next("staging-25.11", &["staging-next-25.11"]);
   }

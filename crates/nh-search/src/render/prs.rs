@@ -6,10 +6,7 @@ use super::common;
 use crate::{
   branches::BranchPlan,
   github::{
-    BranchReachability,
-    BranchReachabilityStatus,
-    PullRequest,
-    PullRequestState,
+    BranchReachability, BranchReachabilityStatus, PullRequest, PullRequestState,
   },
 };
 

@@ -15,12 +15,12 @@ const SEND_RETRY_DELAY: Duration = Duration::from_millis(200);
 
 pub struct GraphqlClient {
   client: Client,
-  token:  SecretString,
+  token: SecretString,
 }
 
 #[derive(Debug, Deserialize)]
 struct GraphqlResponse<T> {
-  data:   Option<T>,
+  data: Option<T>,
   errors: Option<Vec<GraphqlError>>,
 }
 

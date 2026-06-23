@@ -214,21 +214,21 @@ pub enum SearchDefault {
 
 pub enum ResolvedSearchMode<'a> {
   Packages {
-    channel:   &'a str,
-    limit:     u64,
+    channel: &'a str,
+    limit: u64,
     platforms: bool,
-    query:     &'a [String],
+    query: &'a [String],
   },
   Options {
     channel: &'a str,
-    limit:   u64,
-    scope:   OptionScope,
-    query:   &'a [String],
+    limit: u64,
+    scope: OptionScope,
+    query: &'a [String],
   },
   Offline {
-    limit:     u64,
+    limit: u64,
     databases: &'a [PathBuf],
-    query:     &'a [String],
+    query: &'a [String],
   },
   Prs(&'a PrsArgs),
   Issues(&'a IssuesArgs),
@@ -243,29 +243,23 @@ impl SearchArgs {
   /// shorthand option search receives package-only flags.
   pub fn resolved_mode(&self) -> Result<ResolvedSearchMode<'_>> {
     match &self.mode {
-      Some(SearchMode::Packages(args)) => {
-        Ok(ResolvedSearchMode::Packages {
-          channel:   &args.channel.value,
-          limit:     args.limit.value,
-          platforms: args.platforms.value,
-          query:     &args.query,
-        })
-      },
-      Some(SearchMode::Options(args)) => {
-        Ok(ResolvedSearchMode::Options {
-          channel: &args.channel.value,
-          limit:   args.limit.value,
-          scope:   args.scope.unwrap_or(OptionScope::All),
-          query:   &args.query,
-        })
-      },
-      Some(SearchMode::Offline(args)) => {
-        Ok(ResolvedSearchMode::Offline {
-          limit:     args.limit.value,
-          databases: &args.databases,
-          query:     &args.query,
-        })
-      },
+      Some(SearchMode::Packages(args)) => Ok(ResolvedSearchMode::Packages {
+        channel: &args.channel.value,
+        limit: args.limit.value,
+        platforms: args.platforms.value,
+        query: &args.query,
+      }),
+      Some(SearchMode::Options(args)) => Ok(ResolvedSearchMode::Options {
+        channel: &args.channel.value,
+        limit: args.limit.value,
+        scope: args.scope.unwrap_or(OptionScope::All),
+        query: &args.query,
+      }),
+      Some(SearchMode::Offline(args)) => Ok(ResolvedSearchMode::Offline {
+        limit: args.limit.value,
+        databases: &args.databases,
+        query: &args.query,
+      }),
       Some(SearchMode::Prs(args)) => Ok(ResolvedSearchMode::Prs(args)),
       Some(SearchMode::Issues(args)) => Ok(ResolvedSearchMode::Issues(args)),
       None => self.resolved_shorthand_mode(),
@@ -281,14 +275,12 @@ impl SearchArgs {
     }
 
     match self.default_search {
-      SearchDefault::Packages => {
-        Ok(ResolvedSearchMode::Packages {
-          channel:   &self.channel.value,
-          limit:     self.limit.value,
-          platforms: self.platforms.value,
-          query:     &self.query,
-        })
-      },
+      SearchDefault::Packages => Ok(ResolvedSearchMode::Packages {
+        channel: &self.channel.value,
+        limit: self.limit.value,
+        platforms: self.platforms.value,
+        query: &self.query,
+      }),
       SearchDefault::Options => {
         if self.platforms.value {
           bail!("--platforms only applies to package search");
@@ -296,9 +288,9 @@ impl SearchArgs {
 
         Ok(ResolvedSearchMode::Options {
           channel: &self.channel.value,
-          limit:   self.limit.value,
-          scope:   OptionScope::All,
-          query:   &self.query,
+          limit: self.limit.value,
+          scope: OptionScope::All,
+          query: &self.query,
         })
       },
     }
@@ -333,12 +325,10 @@ mod tests {
 
   fn parse_search_error(args: &[&str]) -> clap::error::Result<clap::Error> {
     match parse_search(args) {
-      Ok(args) => {
-        Err(clap::Error::raw(
-          ErrorKind::InvalidValue,
-          format!("expected parse error, got {args:?}"),
-        ))
-      },
+      Ok(args) => Err(clap::Error::raw(
+        ErrorKind::InvalidValue,
+        format!("expected parse error, got {args:?}"),
+      )),
       Err(err) => Ok(err),
     }
   }

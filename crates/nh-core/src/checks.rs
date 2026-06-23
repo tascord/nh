@@ -338,7 +338,7 @@ mod tests {
 
   // This helps set environment variables safely in tests
   struct EnvGuard {
-    key:      String,
+    key: String,
     original: Option<String>,
   }
 

@@ -4,16 +4,14 @@ use std::{
   io::Read,
   path::{Path, PathBuf},
   sync::{
-    Arc,
-    OnceLock,
+    Arc, OnceLock,
     atomic::{AtomicBool, Ordering},
   },
   time::Duration,
 };
 
 use color_eyre::{
-  Report,
-  Result,
+  Report, Result,
   eyre::{Context, bail, eyre},
 };
 use nh_core::{
@@ -441,7 +439,7 @@ impl NixStoreScheme {
 #[derive(Debug, Clone)]
 pub struct RemoteHost {
   /// The host string (may include user@)
-  host:         String,
+  host: String,
   store_scheme: NixStoreScheme,
 }
 
@@ -1312,7 +1310,7 @@ fn eval_drv_path(installable: &Installable) -> Result<PathBuf> {
       let mut drv_attr = attribute.clone();
       drv_attr.push("drvPath".to_string());
       Installable::File {
-        path:      path.clone(),
+        path: path.clone(),
         attribute: drv_attr,
       }
     },
@@ -1324,7 +1322,7 @@ fn eval_drv_path(installable: &Installable) -> Result<PathBuf> {
       drv_attr.push("drvPath".to_string());
       Installable::Expression {
         expression: expression.clone(),
-        attribute:  drv_attr,
+        attribute: drv_attr,
       }
     },
     Installable::Store { path } => {

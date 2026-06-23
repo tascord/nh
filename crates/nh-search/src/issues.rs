@@ -41,18 +41,18 @@ pub fn run(json: bool, args: &args::IssuesArgs) -> Result<()> {
 
 #[derive(Debug, Serialize)]
 struct IssueSearchJsonOutput<'a> {
-  query:      String,
-  days:       u32,
+  query: String,
+  days: u32,
   elapsed_ms: u128,
-  results:    Vec<IssueJsonResult<'a>>,
+  results: Vec<IssueJsonResult<'a>>,
 }
 
 #[derive(Debug, Serialize)]
 struct IssueJsonResult<'a> {
   number: u64,
-  title:  &'a str,
-  url:    &'a str,
-  state:  &'static str,
+  title: &'a str,
+  url: &'a str,
+  state: &'static str,
 }
 
 fn print_json(
@@ -63,13 +63,11 @@ fn print_json(
 ) -> Result<()> {
   let results = issues
     .iter()
-    .map(|issue| {
-      IssueJsonResult {
-        number: issue.number,
-        title:  issue.title.as_str(),
-        url:    issue.url.as_str(),
-        state:  issue.state.as_str(),
-      }
+    .map(|issue| IssueJsonResult {
+      number: issue.number,
+      title: issue.title.as_str(),
+      url: issue.url.as_str(),
+      state: issue.state.as_str(),
     })
     .collect();
 
@@ -93,20 +91,20 @@ mod tests {
   fn issue_json_uses_plain_urls() -> Result<()> {
     let issue = Issue {
       number: 43,
-      title:  "bug report".to_string(),
-      url:    "https://github.com/NixOS/nixpkgs/issues/43".to_string(),
-      state:  IssueState::Open,
+      title: "bug report".to_string(),
+      url: "https://github.com/NixOS/nixpkgs/issues/43".to_string(),
+      state: IssueState::Open,
     };
 
     let output = IssueSearchJsonOutput {
-      query:      "bug".to_string(),
-      days:       15,
+      query: "bug".to_string(),
+      days: 15,
       elapsed_ms: 1,
-      results:    vec![IssueJsonResult {
+      results: vec![IssueJsonResult {
         number: issue.number,
-        title:  issue.title.as_str(),
-        url:    issue.url.as_str(),
-        state:  issue.state.as_str(),
+        title: issue.title.as_str(),
+        url: issue.url.as_str(),
+        state: issue.state.as_str(),
       }],
     };
 

@@ -25,9 +25,9 @@ query($query: String!, $first: Int!) {
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Issue {
   pub number: u64,
-  pub title:  String,
-  pub url:    String,
-  pub state:  IssueState,
+  pub title: String,
+  pub url: String,
+  pub state: IssueState,
 }
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
@@ -58,9 +58,9 @@ struct SearchNodes<T> {
 #[derive(Debug, Deserialize)]
 struct IssueNode {
   number: u64,
-  title:  String,
-  url:    String,
-  state:  String,
+  title: String,
+  url: String,
+  state: String,
 }
 
 pub(super) fn search(
@@ -94,9 +94,9 @@ impl IssueNode {
   fn try_into_issue(self) -> Result<Issue> {
     Ok(Issue {
       number: self.number,
-      title:  self.title,
-      url:    self.url,
-      state:  parse_state(&self.state)?,
+      title: self.title,
+      url: self.url,
+      state: parse_state(&self.state)?,
     })
   }
 }

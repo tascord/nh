@@ -13,9 +13,9 @@ const BACKEND_VERSION: &str = include_str!("../BACKEND_VERSION");
 
 #[derive(Clone, Copy)]
 pub struct SearchContexts {
-  pub build:   &'static str,
+  pub build: &'static str,
   pub execute: &'static str,
-  pub parse:   &'static str,
+  pub parse: &'static str,
 }
 
 pub fn search_documents<T>(

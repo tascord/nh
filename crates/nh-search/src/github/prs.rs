@@ -70,13 +70,13 @@ struct RepositoryData {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct PullRequestNode {
-  number:        u64,
-  title:         String,
-  url:           String,
-  state:         String,
-  merged:        bool,
+  number: u64,
+  title: String,
+  url: String,
+  state: String,
+  merged: bool,
   base_ref_name: String,
-  merge_commit:  Option<MergeCommitNode>,
+  merge_commit: Option<MergeCommitNode>,
 }
 
 #[derive(Debug, Deserialize)]

@@ -1,6 +1,5 @@
 use std::{
-  env,
-  fs,
+  env, fs,
   io::{self, IsTerminal, Write},
   os::unix::fs::{DirBuilderExt, PermissionsExt},
   path::{Path, PathBuf},
@@ -183,7 +182,7 @@ mod tests {
   use super::*;
 
   struct EnvGuard {
-    key:   &'static str,
+    key: &'static str,
     value: Option<std::ffi::OsString>,
   }
 

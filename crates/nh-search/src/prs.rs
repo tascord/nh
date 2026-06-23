@@ -7,13 +7,8 @@ use crate::{
   args,
   branches::BranchPlan,
   github::{
-    self,
-    BranchReachability,
-    BranchReachabilityRequest,
-    BranchReachabilityStatus,
-    GitHubClient,
-    PullRequest,
-    PullRequestState,
+    self, BranchReachability, BranchReachabilityRequest,
+    BranchReachabilityStatus, GitHubClient, PullRequest, PullRequestState,
     parse_direct_pr_number,
   },
   render,
@@ -102,7 +97,7 @@ fn probe_reachability_by_pr(
       for branch in plan.probe_targets() {
         pr_indexes.push(pr_index);
         requests.push(BranchReachabilityRequest {
-          branch:     branch.clone(),
+          branch: branch.clone(),
           commit_sha: sha.to_string(),
         });
       }
@@ -122,22 +117,22 @@ fn probe_reachability_by_pr(
 
 #[derive(Debug, Serialize)]
 struct PrSearchJsonOutput<'a> {
-  query:            String,
-  days:             Option<u32>,
+  query: String,
+  days: Option<u32>,
   direct_pr_number: Option<u64>,
-  elapsed_ms:       u128,
-  results:          Vec<PrJsonResult<'a>>,
+  elapsed_ms: u128,
+  results: Vec<PrJsonResult<'a>>,
 }
 
 #[derive(Debug, Serialize)]
 struct PrJsonResult<'a> {
-  number:           u64,
-  title:            &'a str,
-  url:              &'a str,
-  state:            &'static str,
-  base_branch:      &'a str,
+  number: u64,
+  title: &'a str,
+  url: &'a str,
+  state: &'static str,
+  base_branch: &'a str,
   merge_commit_sha: Option<&'a str>,
-  reachability:     Vec<BranchReachabilityJson<'a>>,
+  reachability: Vec<BranchReachabilityJson<'a>>,
 }
 
 #[derive(Debug, Serialize)]
@@ -224,32 +219,28 @@ mod tests {
     let reachability = vec![Vec::new()];
 
     let output = PrSearchJsonOutput {
-      query:            "#42".to_string(),
-      days:             None,
+      query: "#42".to_string(),
+      days: None,
       direct_pr_number: Some(42),
-      elapsed_ms:       1,
-      results:          prs
+      elapsed_ms: 1,
+      results: prs
         .iter()
         .zip(&reachability)
-        .map(|(pr, reachability)| {
-          PrJsonResult {
-            number:           pr.number,
-            title:            pr.title.as_str(),
-            url:              pr.url.as_str(),
-            state:            pr.state.as_str(),
-            base_branch:      pr.base_branch.as_str(),
-            merge_commit_sha: pr.merge_commit_sha.as_deref(),
-            reachability:     reachability
-              .iter()
-              .map(|branch: &BranchReachability| {
-                BranchReachabilityJson {
-                  branch: branch.branch.as_str(),
-                  status: branch.status.as_str(),
-                  reason: None,
-                }
-              })
-              .collect(),
-          }
+        .map(|(pr, reachability)| PrJsonResult {
+          number: pr.number,
+          title: pr.title.as_str(),
+          url: pr.url.as_str(),
+          state: pr.state.as_str(),
+          base_branch: pr.base_branch.as_str(),
+          merge_commit_sha: pr.merge_commit_sha.as_deref(),
+          reachability: reachability
+            .iter()
+            .map(|branch: &BranchReachability| BranchReachabilityJson {
+              branch: branch.branch.as_str(),
+              status: branch.status.as_str(),
+              reason: None,
+            })
+            .collect(),
         })
         .collect(),
     };

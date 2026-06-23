@@ -20,12 +20,12 @@ use super::{RemoteHost, get_flake_flags, get_nix_sshopts_env};
 enum CopyDirection<'a> {
   FromRemote(&'a RemoteHost),
   ToRemote {
-    host:            &'a RemoteHost,
+    host: &'a RemoteHost,
     use_substitutes: bool,
   },
   BetweenRemotes {
-    from_host:       &'a RemoteHost,
-    to_host:         &'a RemoteHost,
+    from_host: &'a RemoteHost,
+    to_host: &'a RemoteHost,
     use_substitutes: bool,
   },
 }
@@ -344,7 +344,7 @@ mod tests {
 
     assert_eq!(
       CopyDirection::ToRemote {
-        host:            &host,
+        host: &host,
         use_substitutes: true,
       }
       .args(),
@@ -364,7 +364,7 @@ mod tests {
 
     assert_eq!(
       CopyDirection::ToRemote {
-        host:            &host,
+        host: &host,
         use_substitutes: true,
       }
       .args(),
@@ -382,12 +382,15 @@ mod tests {
   fn test_copy_direction_from_remote_cannot_take_substitute_policy() {
     let host = RemoteHost::parse("build.example").unwrap();
 
-    assert_eq!(CopyDirection::FromRemote(&host).args(), vec![
-      "copy",
-      "--no-check-sigs",
-      "--from",
-      "ssh-ng://build.example"
-    ]);
+    assert_eq!(
+      CopyDirection::FromRemote(&host).args(),
+      vec![
+        "copy",
+        "--no-check-sigs",
+        "--from",
+        "ssh-ng://build.example"
+      ]
+    );
   }
 
   #[test]
@@ -397,8 +400,8 @@ mod tests {
 
     assert_eq!(
       CopyDirection::BetweenRemotes {
-        from_host:       &from_host,
-        to_host:         &to_host,
+        from_host: &from_host,
+        to_host: &to_host,
         use_substitutes: true,
       }
       .args(),
@@ -420,7 +423,7 @@ mod tests {
 
     assert_eq!(
       CopyDirection::ToRemote {
-        host:            &host,
+        host: &host,
         use_substitutes: false,
       }
       .args(),

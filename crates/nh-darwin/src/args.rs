@@ -2,10 +2,7 @@ use clap::{Args, Subcommand};
 use nh_core::{
   args::CommonRebuildArgs,
   checks::{
-    DarwinReplFeatures,
-    FeatureRequirements,
-    FlakeFeatures,
-    LegacyFeatures,
+    DarwinReplFeatures, FeatureRequirements, FlakeFeatures, LegacyFeatures,
   },
   update::UpdateArgs,
 };

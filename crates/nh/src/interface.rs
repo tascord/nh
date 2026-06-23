@@ -56,6 +56,16 @@ pub struct Main {
   /// elevation programs in order: doas, sudo, run0, pkexec)
   pub elevation_strategy: Option<nh_core::command::ElevationStrategyArg>,
 
+  #[arg(long, global = true)]
+  /// Acquire sudo privileges before running to allow unattended execution.
+  /// Only prompts for password if elevation is actually needed.
+  pub usurp: bool,
+
+  #[arg(long = "flamegraph", short = 'f', global = true)]
+  /// Generate a flamegraph SVG profiling the execution.
+  /// Requires `perf` to be installed on Linux.
+  pub flamegraph: bool,
+
   #[command(subcommand)]
   pub command: NHCommand,
 }

@@ -1,10 +1,10 @@
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct PullRequest {
-  pub number:           u64,
-  pub title:            String,
-  pub url:              String,
-  pub state:            PullRequestState,
-  pub base_branch:      String,
+  pub number: u64,
+  pub title: String,
+  pub url: String,
+  pub state: PullRequestState,
+  pub base_branch: String,
   pub merge_commit_sha: Option<String>,
 }
 
@@ -33,7 +33,7 @@ pub struct BranchReachability {
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct BranchReachabilityRequest {
-  pub branch:     String,
+  pub branch: String,
   pub commit_sha: String,
 }
 

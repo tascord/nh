@@ -42,9 +42,9 @@ const AUTO_GCROOTS_DIR: &str = "/nix/var/nix/gcroots/auto";
 
 #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 struct Generation {
-  number:        u32,
+  number: u32,
   last_modified: SystemTime,
-  path:          PathBuf,
+  path: PathBuf,
 }
 
 type ToBeRemoved = bool;

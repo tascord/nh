@@ -14,9 +14,7 @@ pub use self::{
   issues::{Issue, IssueState},
   prs::{PullRequest, PullRequestState, parse_direct_pr_number},
   reachability::{
-    BranchReachability,
-    BranchReachabilityRequest,
-    BranchReachabilityStatus,
+    BranchReachability, BranchReachabilityRequest, BranchReachabilityStatus,
   },
 };
 
